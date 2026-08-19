@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dorcas & Archange - 18° compleanno</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+<!-- ACCESSO PRIVATO -->
+<section class="screen access-screen active" id="access">
+
+  <div class="club-lights">
+    <span class="light-beam beam-left"></span>
+    <span class="light-beam beam-right"></span>
+  </div>
+
+  <div class="ambient-glow"></div>
+
+  <div class="access-content">
+
+    <div class="access-symbol">✦</div>
+
+    <p class="eyebrow">
+      INVITO PRIVATO
+    </p>
+
+    <h2>
+      QUESTA NOTTE<br>
+      È SOLO PER TE
+    </h2>
+
+    <p class="access-message">
+      Inserisci il codice<br>
+      per entrare.
+    </p>
+
+    <div class="code-box">
+
+      <input
+        type="password"
+        id="accessCode"
+        maxlength="6"
+        inputmode="numeric"
+        placeholder="••••••"
+        autocomplete="off"
+      >
+
+    </div>
+
+    <button
+      class="main-button access-button"
+      onclick="checkAccess()">
+
+      ENTRA
+
+    </button>
+
+    <p
+      class="access-error"
+      id="accessError">
+    </p>
+
+  </div>
+
+</section>
+
+    <!-- =====================================================
+         SCHERMATA INIZIALE
+         ===================================================== -->
+
+    <section class="screen intro" id="intro">
+      <div class="club-lights">
+  <span class="light-beam beam-left"></span>
+  <span class="light-beam beam-right"></span>
+</div>
+
+<div class="ambient-glow"></div>
+
+      <div class="background-lights"></div>
+
+      <div class="intro-content">
+
+        <p class="eyebrow">
+          YOU ARE INVITED TO
+        </p>
+
+        <div class="number-halo"></div>
+        
+        <div class="number-halo"></div>
+
+<div class="hero-number">
+  <span>18</span>
+  <div class="number-shine"></div>
+</div>
+
+        <p class="names">
+          DORCAS & ARCHANGE
+        </p>
+
+        <p class="intro-message">
+          Una serata speciale sta per iniziare...
+        </p>
+
+        <button
+          class="enter-button"
+          onclick="showScreen('invitation')">
+          ENTRA
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PRESENTAZIONE
+         ===================================================== -->
+
+    <section class="screen invitation" id="invitation">
+      <div class="club-lights">
+  <span class="light-beam beam-left"></span>
+  <span class="light-beam beam-right"></span>
+</div>
+
+<div class="ambient-glow"></div>
+
+      <div class="background-lights"></div>
+
+      <div class="silver-line"></div>
+
+      <p class="eyebrow">
+        SIETE INVITATI
+      </p>
+
+      <h2>
+        A FESTEGGIARE<br>
+        CON NOI
+      </h2>
+
+      <div class="age">
+        18
+      </div>
+
+      <p class="message">
+        Un traguardo speciale,<br>
+        una serata da ricordare<br>
+        e tante persone con cui condividerla.
+      </p>
+
+      <button
+        class="main-button"
+        onclick="showScreen('details')">
+        SCOPRI L'EVENTO
+      </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         DETTAGLI
+         ===================================================== -->
+
+ <section class="screen details-screen" id="details">
+
+  <div class="club-lights">
+    <span class="light-beam beam-left"></span>
+    <span class="light-beam beam-right"></span>
+  </div>
+
+  <div class="ambient-glow"></div>
+
+  <div class="background-lights"></div>
+
+  <p class="eyebrow">
+    SAVE THE DATE
+  </p>
+
+  <div class="date-display">
+
+    <span class="date-day">
+      19
+    </span>
+
+    <span class="date-month">
+      SETTEMBRE
+    </span>
+
+  </div>
+
+  <div class="date-line">
+    <span></span>
+    <i>✦</i>
+    <span></span>
+  </div>
+
+
+  <!-- ORARIO -->
+
+  <div class="event-time">
+
+    <div>
+      <small>INIZIO</small>
+      <strong>20:30</strong>
+    </div>
+
+    <span class="time-divider">—</span>
+
+    <div>
+      <small>FINE</small>
+      <strong>01:30</strong>
+    </div>
+
+  </div>
+
+
+  <!-- COUNTDOWN -->
+
+  <div class="countdown-container">
+
+    <p class="countdown-title">
+      IL CONTO ALLA ROVESCIA È INIZIATO
+    </p>
+
+    <div class="countdown" id="countdown">
+
+      <div class="countdown-item">
+        <strong id="days">00</strong>
+        <span>GIORNI</span>
+      </div>
+
+      <div class="countdown-separator">:</div>
+
+      <div class="countdown-item">
+        <strong id="hours">00</strong>
+        <span>ORE</span>
+      </div>
+
+      <div class="countdown-separator">:</div>
+
+      <div class="countdown-item">
+        <strong id="minutes">00</strong>
+        <span>MIN</span>
+      </div>
+
+      <div class="countdown-separator">:</div>
+
+      <div class="countdown-item">
+        <strong id="seconds">00</strong>
+        <span>SEC</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- LOCATION -->
+
+  <div class="event-location">
+
+    <span>LOCATION</span>
+
+    <strong>ENFER CLUB</strong>
+
+    <p>
+      Via Nomentana n. 536, Roma
+    </p>
+
+  </div>
+
+
+  <a
+    href="https://www.google.com/maps/search/?api=1&query=Enfer+Club+Via+Nomentana+536+Roma"
+    target="_blank"
+    class="main-button">
+
+    📍 COME ARRIVARE
+
+  </a>
+
+
+  <button
+    class="main-button secondary"
+    onclick="showScreen('dresscode')">
+
+    CONTINUA
+
+  </button>
+
+</section>
+
+
+    <!-- =====================================================
+         DRESS CODE
+         ===================================================== -->
+
+   <section class="screen dresscode" id="dresscode">
+
+  <div class="club-lights">
+    <span class="light-beam beam-left"></span>
+    <span class="light-beam beam-right"></span>
+  </div>
+
+  <div class="ambient-glow"></div>
+
+  <div class="background-lights"></div>
+
+  <p class="eyebrow">
+    DRESSCODE
+  </p>
+
+
+  <div class="dress-symbol">
+
+    <div class="dress-ring ring-one"></div>
+    <div class="dress-ring ring-two"></div>
+
+    <span>✦</span>
+
+  </div>
+
+
+  <h2>
+    ELEGANTE
+  </h2>
+
+
+  <div class="dress-line"></div>
+
+
+  <p class="message">
+
+    Per una notte così speciale,<br>
+    anche il look vuole la sua parte.
+
+  </p>
+
+
+  <div class="dress-note">
+    BLACK · SILVER · ELEGANCE
+  </div>
+
+
+  <button
+    class="main-button"
+    onclick="showScreen('rsvp')">
+
+    CONFERMA PRESENZA
+
+  </button>
+
+</section>
+
+
+    <!-- =====================================================
+         RSVP
+         ===================================================== -->
+
+  <section class="screen rsvp" id="rsvp">
+
+  <div class="club-lights">
+    <span class="light-beam beam-left"></span>
+    <span class="light-beam beam-right"></span>
+  </div>
+
+  <div class="ambient-glow"></div>
+
+  <div class="background-lights"></div>
+
+
+  <div class="rsvp-top-symbol">
+    ✦
+  </div>
+
+
+  <p class="eyebrow">
+    ULTIMO PASSO
+  </p>
+
+
+  <h2>
+    CI SARAI?
+  </h2>
+
+
+  <p class="message">
+
+    La tua presenza renderà<br>
+    questa notte ancora più speciale.
+
+  </p>
+
+
+  <div class="rsvp-buttons" id="rsvpButtons">
+
+    <button
+      class="rsvp-btn yes"
+      onclick="rsvpResponse('yes')">
+
+      <span>SI, CI SARÒ</span>
+      <small>♡</small>
+
+    </button>
+
+
+    <button
+      class="rsvp-btn no"
+      onclick="rsvpResponse('no')">
+
+      <span>MI DISPIACE, NON POSSO</span>
+      <small>×</small>
+
+    </button>
+
+  </div>
+
+
+  <div
+    class="rsvp-response"
+    id="rsvpResponse">
+
+    <div
+      class="response-symbol"
+      id="responseSymbol">
+    </div>
+
+    <h3 id="responseTitle"></h3>
+
+    <p id="responseMessage"></p>
+
+  </div>
+
+
+  <div class="final-signature">
+
+    <span>
+      DORCAS & ARCHANGE
+    </span>
+
+    <strong>
+      18
+    </strong>
+
+  </div>
+
+</section>
+
+
+    <!-- PARTICELLE -->
+
+    <div
+      class="celebration-particles"
+      id="celebrationParticles">
+    </div>
+
+
+    <!-- LUCE RSVP -->
+
+    <div
+      class="rsvp-flash"
+      id="rsvpFlash">
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
