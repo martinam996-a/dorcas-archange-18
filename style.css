@@ -11,13 +11,11 @@
   padding: 0;
 }
 
-
 html,
 body {
   width: 100%;
   height: 100%;
 }
-
 
 body {
   background: #000;
@@ -25,7 +23,6 @@ body {
   font-family: 'Montserrat', sans-serif;
   overflow: hidden;
 }
-
 
 .app {
   width: 100%;
@@ -41,6 +38,7 @@ body {
   position: fixed;
   inset: 0;
 
+  width: 100%;
   min-height: 100vh;
 
   display: flex;
@@ -65,7 +63,6 @@ body {
   overflow: hidden;
 }
 
-
 .screen.active {
   opacity: 1;
   visibility: visible;
@@ -74,14 +71,13 @@ body {
 
 
 /* =========================================================
-   SFONDO
+   SFONDO GENERALE
    ========================================================= */
 
 .screen::before {
   content: "";
 
   position: absolute;
-
   inset: -30%;
 
   background:
@@ -101,27 +97,98 @@ body {
       transparent 28%
     );
 
-  animation:
-    ambientLight 10s infinite alternate ease-in-out;
+  animation: ambientLight 10s infinite alternate ease-in-out;
 
   pointer-events: none;
 }
 
 
-.intro {
+/* =========================================================
+   LUCI AMBIENTALI
+   ========================================================= */
+
+.club-lights {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.light-beam {
+  position: absolute;
+
+  width: 35vw;
+  height: 130vh;
+
+  top: -20vh;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255,255,255,0.08),
+      rgba(255,255,255,0.025),
+      transparent
+    );
+
+  filter: blur(18px);
+
+  opacity: 0.55;
+
+  transform-origin: top center;
+
+  animation: beamMove 9s infinite ease-in-out;
+}
+
+.beam-left {
+  left: 5%;
+}
+
+.beam-right {
+  right: 5%;
+  animation-delay: -4s;
+}
+
+.ambient-glow {
+  position: absolute;
+
+  width: 55vw;
+  height: 55vw;
+
+  max-width: 650px;
+  max-height: 650px;
+
+  left: 50%;
+  top: 48%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
   background:
     radial-gradient(
-      circle at center,
-      #292929 0%,
-      #111 28%,
-      #050505 60%,
-      #000 100%
+      circle,
+      rgba(255,255,255,0.08) 0%,
+      rgba(255,255,255,0.035) 30%,
+      transparent 70%
     );
+
+  filter: blur(10px);
+
+  animation: ambientPulse 5s infinite ease-in-out;
+
+  pointer-events: none;
+
+  z-index: 0;
 }
 
 
 /* =========================================================
-   LUCI DISCO
+   LUCI / STELLINE DI SFONDO
    ========================================================= */
 
 .background-lights {
@@ -131,8 +198,9 @@ body {
   overflow: hidden;
 
   pointer-events: none;
-}
 
+  z-index: 0;
+}
 
 .background-lights::before {
   content: "";
@@ -163,23 +231,20 @@ body {
     600px 350px 0 #999,
     -100px 250px 0 #ddd;
 
-  opacity: 0.45;
+  opacity: 0.7;
 
   animation:
     sparkleFloat 6s infinite ease-in-out,
     sparkleMove 12s infinite alternate ease-in-out;
 }
 
-
 .background-lights::after {
   content: "✦     ✧          ✦       ✧          ✦     ✧";
 
   position: absolute;
-
   inset: -20%;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -187,11 +252,12 @@ body {
 
   letter-spacing: 35px;
 
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.5);
 
   text-shadow:
-    0 0 5px rgba(255,255,255,0.4),
-    0 0 15px rgba(255,255,255,0.2);
+    0 0 7px rgba(255,255,255,0.7),
+    0 0 18px rgba(255,255,255,0.35),
+    0 0 35px rgba(255,255,255,0.15);
 
   animation:
     sparkleTwinkle 4s infinite ease-in-out,
@@ -200,20 +266,153 @@ body {
 
 
 /* =========================================================
-   INTRO
+   SCHERMATA ACCESSO
    ========================================================= */
 
-.intro-content {
-  position: relative;
-  z-index: 2;
+.access-screen {
+  background:
+    radial-gradient(
+      circle at center,
+      #202020 0%,
+      #090909 48%,
+      #000 100%
+    );
+}
 
-  animation: contentReveal 1.2s ease both;
+.access-content {
+  position: relative;
+
+  z-index: 10;
+
+  width: min(400px, 90vw);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.access-symbol {
+  font-size: 13px;
+
+  color: #ddd;
+
+  margin-bottom: 25px;
+
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.5);
+
+  animation:
+    accessSymbolPulse 3s infinite ease-in-out;
+}
+
+.access-content .eyebrow {
+  margin-bottom: 25px;
+}
+
+.access-content h2 {
+  font-family: 'Playfair Display', serif;
+
+  font-size: 43px;
+
+  line-height: 0.95;
+
+  font-weight: 500;
+
+  letter-spacing: 1px;
+
+  color: #eee;
+
+  text-shadow:
+    0 0 20px rgba(255,255,255,0.08);
+
+  margin-bottom: 25px;
+}
+
+.access-message {
+  font-size: 11px;
+
+  line-height: 1.9;
+
+  color: #888;
+
+  margin-bottom: 22px;
+}
+
+.code-box {
+  position: relative;
+
+  width: 220px;
+
+  margin-bottom: 18px;
+}
+
+.code-box input {
+  width: 100%;
+  height: 50px;
+
+  border: none;
+  border-bottom: 1px solid #555;
+
+  background: transparent;
+
+  color: #fff;
+
+  text-align: center;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 20px;
+
+  letter-spacing: 9px;
+
+  outline: none;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.code-box input:focus {
+  border-bottom-color: #ddd;
+
+  box-shadow:
+    0 8px 20px -15px rgba(255,255,255,0.5);
+}
+
+.code-box input::placeholder {
+  color: #444;
+  letter-spacing: 8px;
+}
+
+.access-button {
+  margin-top: 5px;
+}
+
+.access-error {
+  min-height: 20px;
+
+  margin-top: 15px;
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+
+  color: #888;
+}
+
+.code-box input.wrong {
+  animation: codeShake 0.35s ease;
+  border-bottom-color: #aaa;
 }
 
 
+/* =========================================================
+   ELEMENTI TESTUALI GENERALI
+   ========================================================= */
+
 .eyebrow {
   position: relative;
-  z-index: 2;
+  z-index: 10;
 
   font-size: 10px;
 
@@ -224,120 +423,17 @@ body {
   margin-bottom: 25px;
 }
 
-
-/* =========================================================
-   NUMERO 18
-   ========================================================= */
-
-.intro h1 {
-
+.message {
   position: relative;
-  z-index: 2;
+  z-index: 10;
 
-  font-family: 'Playfair Display', serif;
+  font-size: 12px;
 
-  font-size: clamp(130px, 34vw, 190px);
+  line-height: 2;
 
-  font-weight: 500;
+  color: #999;
 
-  line-height: 1;
-
-  letter-spacing: -6px;
-
-  background:
-    linear-gradient(
-      115deg,
-      #555 0%,
-      #ddd 18%,
-      #fff 35%,
-      #888 50%,
-      #fff 68%,
-      #bbb 82%,
-      #555 100%
-    );
-
-  background-size: 250% auto;
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  color: transparent;
-
-  filter:
-    drop-shadow(0 0 8px rgba(255,255,255,0.15));
-
-  animation:
-    chromeShine 5s infinite linear,
-    numberPulse 4s infinite ease-in-out;
-}
-
-
-.names {
-  margin-top: 35px;
-
-  font-size: 13px;
-
-  letter-spacing: 6px;
-}
-
-
-.intro-message {
-  margin-top: 18px;
-
-  font-size: 11px;
-
-  color: #888;
-
-  letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   TITOLI
-   ========================================================= */
-
-.invitation h2,
-.details-screen h2,
-.dresscode h2,
-.rsvp h2 {
-
-  position: relative;
-  z-index: 2;
-
-  font-family: 'Playfair Display', serif;
-
-  font-weight: 500;
-
-  font-size: clamp(50px, 12vw, 68px);
-
-  line-height: 0.85;
-
-  letter-spacing: 1px;
-}
-
-
-.silver-line {
-
-  position: relative;
-  z-index: 2;
-
-  width: 80px;
-
-  height: 1px;
-
-  background:
-    linear-gradient(
-      to right,
-      transparent,
-      #fff,
-      #777,
-      transparent
-    );
-
-  box-shadow:
-    0 0 8px rgba(255,255,255,0.3);
-
-  margin-bottom: 30px;
+  margin: 30px 0;
 }
 
 
@@ -349,9 +445,9 @@ button,
 .main-button,
 .enter-button,
 .rsvp-btn {
-
   position: relative;
-  z-index: 5;
+
+  z-index: 10;
 
   border: 1px solid #777;
 
@@ -379,12 +475,10 @@ button,
     transform 0.35s ease;
 }
 
-
 button:hover,
 .main-button:hover,
 .enter-button:hover,
 .rsvp-btn:hover {
-
   background: #eee;
 
   color: #050505;
@@ -399,11 +493,6 @@ button:hover,
 }
 
 
-.enter-button {
-  margin-top: 50px;
-}
-
-
 /* =========================================================
    ANIMAZIONI DI INGRESSO
    ========================================================= */
@@ -412,25 +501,24 @@ button:hover,
   animation: elementIn 0.8s 0.15s both;
 }
 
-
 .screen.active h2 {
   animation: elementIn 0.9s 0.3s both;
 }
 
-
 .screen.active .age,
-.screen.active .symbol {
+.screen.active .symbol,
+.screen.active .dress-symbol {
   animation: elementIn 1s 0.45s both;
 }
-
 
 .screen.active .message,
 .screen.active .event-time,
 .screen.active .countdown-container,
-.screen.active .event-location {
+.screen.active .event-location,
+.screen.active .date-display,
+.screen.active .date-line {
   animation: elementIn 0.9s 0.55s both;
 }
-
 
 .screen.active .main-button,
 .screen.active .enter-button,
@@ -440,13 +528,540 @@ button:hover,
 
 
 /* =========================================================
-   INVITO
+   INTRO
    ========================================================= */
 
-.age {
+.intro {
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      #3a3a3a 0%,
+      #171717 25%,
+      #070707 58%,
+      #000 100%
+    );
 
+  isolation: isolate;
+}
+
+.intro .club-lights,
+.intro .background-lights,
+.intro .disco-balls,
+.intro .ambient-glow {
+  z-index: 0;
+}
+
+.intro-content {
   position: relative;
-  z-index: 2;
+
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  animation: contentReveal 1.2s ease both;
+}
+
+.intro-content .eyebrow {
+  position: relative;
+  z-index: 11;
+}
+
+
+/* =========================================================
+   DECORAZIONI INTRO
+   ========================================================= */
+
+.intro-decor {
+  position: absolute;
+
+  width: 360px;
+  height: 300px;
+
+  left: 50%;
+  top: 47%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.decor-star {
+  position: absolute;
+
+  color: #eee;
+
+  font-size: 13px;
+
+  text-shadow:
+    0 0 5px rgba(255,255,255,0.7),
+    0 0 15px rgba(255,255,255,0.25);
+
+  animation:
+    starTwinkle 3s infinite ease-in-out;
+}
+
+.star-1 {
+  left: 8%;
+  top: 23%;
+}
+
+.star-2 {
+  right: 8%;
+  top: 18%;
+
+  font-size: 10px;
+
+  animation-delay: -1.2s;
+}
+
+.star-3 {
+  left: 15%;
+  bottom: 17%;
+
+  font-size: 9px;
+
+  animation-delay: -2s;
+}
+
+.star-4 {
+  right: 14%;
+  bottom: 20%;
+
+  font-size: 14px;
+
+  animation-delay: -0.6s;
+}
+
+.decor-dot {
+  position: absolute;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: #ddd;
+
+  box-shadow:
+    0 0 6px rgba(255,255,255,0.8);
+
+  animation:
+    dotFloat 4s infinite ease-in-out;
+}
+
+.dot-1 {
+  left: 25%;
+  top: 12%;
+
+  animation-delay: -1s;
+}
+
+.dot-2 {
+  right: 24%;
+  top: 35%;
+
+  animation-delay: -2.5s;
+}
+
+.dot-3 {
+  left: 30%;
+  bottom: 9%;
+
+  animation-delay: -0.5s;
+}
+
+.orbit {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 330px;
+  height: 115px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-18deg);
+
+  box-shadow:
+    0 0 12px rgba(255,255,255,0.04);
+
+  animation:
+    orbitPulse 5s infinite ease-in-out;
+}
+
+.orbit-two {
+  width: 290px;
+  height: 95px;
+
+  border-color:
+    rgba(255,255,255,0.07);
+
+  transform:
+    translate(-50%, -50%)
+    rotate(32deg);
+
+  animation-delay: -2s;
+}
+
+
+/* =========================================================
+   NUMERO 18 INTRO
+   ========================================================= */
+
+.hero-number {
+  position: relative;
+
+  z-index: 11;
+
+  display: inline-block;
+
+  padding: 10px 18px 18px;
+
+  line-height: 1;
+
+  animation: heroFloat 5s infinite ease-in-out;
+}
+
+.hero-number span {
+  display: block;
+
+  font-family: 'Playfair Display', serif;
+
+  font-size: clamp(130px, 34vw, 190px);
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: -6px;
+
+  background:
+    linear-gradient(
+      105deg,
+      #4a4a4a 0%,
+      #9b9b9b 14%,
+      #f8f8f8 27%,
+      #777 39%,
+      #eeeeee 50%,
+      #666 61%,
+      #cfcfcf 73%,
+      #ffffff 84%,
+      #555 100%
+    );
+
+  background-size: 250% 100%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  filter:
+    drop-shadow(0 2px 2px rgba(0,0,0,0.8))
+    drop-shadow(0 0 10px rgba(255,255,255,0.18));
+
+  animation:
+    chromeMovement 6s infinite linear,
+    heroNumberGlow 4s infinite ease-in-out;
+}
+
+.names {
+  position: relative;
+
+  z-index: 11;
+
+  margin-top: 25px;
+
+  font-size: 13px;
+
+  letter-spacing: 7px;
+
+  color: #ddd;
+
+  text-shadow:
+    0 0 8px rgba(255,255,255,0.12);
+}
+
+.names::before,
+.names::after {
+  content: "";
+
+  display: block;
+
+  width: 55px;
+  height: 1px;
+
+  margin: 12px auto;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      #777,
+      transparent
+    );
+
+  opacity: 0.7;
+}
+
+.intro-message {
+  position: relative;
+
+  z-index: 11;
+
+  margin-top: 5px;
+
+  font-size: 11px;
+
+  color: #888;
+
+  letter-spacing: 1px;
+}
+
+.enter-button {
+  z-index: 11;
+
+  margin-top: 30px;
+}
+
+
+/* =========================================================
+   DISCO BALL
+   ========================================================= */
+
+.disco-balls {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  z-index: 1;
+}
+
+.disco-ball {
+  position: absolute;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 32% 25%,
+      #ffffff 0%,
+      #cfcfcf 8%,
+      #777 20%,
+      #222 42%,
+      #050505 72%,
+      #000 100%
+    );
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  box-shadow:
+    inset -12px -15px 25px rgba(0,0,0,0.8),
+    inset 8px 8px 18px rgba(255,255,255,0.25),
+    0 10px 25px rgba(0,0,0,0.8);
+
+  overflow: visible;
+
+  animation:
+    discoFloat 6s infinite ease-in-out;
+}
+
+.disco-ball::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 7%;
+
+  border-radius: 50%;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(255,255,255,0.35) 9px,
+      transparent 10px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(255,255,255,0.28) 9px,
+      transparent 10px
+    );
+
+  opacity: 0.65;
+
+  mix-blend-mode: screen;
+
+  transform: rotate(8deg);
+
+  animation:
+    mirrorRotate 12s infinite linear;
+}
+
+.disco-ball::after {
+  content: "";
+
+  position: absolute;
+
+  width: 38%;
+  height: 38%;
+
+  top: 12%;
+  left: 17%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.95) 0%,
+      rgba(255,255,255,0.5) 25%,
+      rgba(255,255,255,0.08) 55%,
+      transparent 75%
+    );
+
+  filter: blur(2px);
+
+  opacity: 0.85;
+
+  animation:
+    ballReflection 4s infinite ease-in-out;
+}
+
+.disco-string {
+  position: absolute;
+
+  width: 1px;
+  height: 80px;
+
+  left: 50%;
+  bottom: 95%;
+
+  transform: translateX(-50%);
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(255,255,255,0.35),
+      rgba(255,255,255,0.08),
+      transparent
+    );
+
+  box-shadow:
+    0 0 3px rgba(255,255,255,0.2);
+}
+
+.disco-shine {
+  position: absolute;
+
+  width: 6px;
+  height: 6px;
+
+  top: 18%;
+  left: 25%;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 8px rgba(255,255,255,0.9),
+    0 0 20px rgba(255,255,255,0.5);
+
+  animation:
+    shinePulse 2s infinite ease-in-out;
+}
+
+.disco-ball-large {
+  width: 115px;
+  height: 115px;
+
+  top: 5%;
+  left: -18px;
+
+  animation-delay: -1s;
+}
+
+.disco-ball-medium {
+  width: 82px;
+  height: 82px;
+
+  top: 10%;
+  right: -8px;
+
+  animation-delay: -3s;
+}
+
+.disco-ball-small {
+  width: 58px;
+  height: 58px;
+
+  top: 34%;
+  right: 13%;
+
+  animation-delay: -5s;
+}
+
+
+/* =========================================================
+   SCHERMATA INVITO
+   ========================================================= */
+
+/*
+   IMPORTANTE:
+   Questa schermata NON viene più centrata verticalmente.
+   Partiamo dall'alto con un padding controllato.
+*/
+
+.invitation {
+  justify-content: flex-start;
+
+  padding-top: 13vh;
+}
+
+.invitation .silver-line {
+  flex-shrink: 0;
+}
+
+.invitation .eyebrow {
+  flex-shrink: 0;
+}
+
+.invitation h2 {
+  position: relative;
+
+  z-index: 10;
+
+  font-family: 'Playfair Display', serif;
+
+  font-weight: 500;
+
+  font-size: clamp(50px, 12vw, 68px);
+
+  line-height: 0.85;
+
+  letter-spacing: 1px;
+}
+
+.invitation .age {
+  position: relative;
+
+  z-index: 10;
 
   font-family: 'Playfair Display', serif;
 
@@ -454,9 +1069,11 @@ button:hover,
 
   font-weight: 500;
 
+  line-height: 1;
+
   color: #ddd;
 
-  margin: 25px 0;
+  margin: 22px 0 15px;
 
   text-shadow:
     0 0 8px rgba(255,255,255,0.15),
@@ -466,24 +1083,123 @@ button:hover,
     ageGlow 3s infinite ease-in-out;
 }
 
+.invitation .message {
+  margin: 15px 0 22px;
+}
 
-.message {
-
-  position: relative;
-  z-index: 2;
-
-  font-size: 12px;
-
-  line-height: 2;
-
-  color: #999;
-
-  margin: 30px 0;
+.invitation .main-button {
+  margin-top: 0;
 }
 
 
-.main-button {
-  margin-top: 15px;
+/* =========================================================
+   DETTAGLI
+   ========================================================= */
+
+.details-screen h2,
+.dresscode h2,
+.rsvp h2 {
+  position: relative;
+
+  z-index: 10;
+
+  font-family: 'Playfair Display', serif;
+
+  font-weight: 500;
+
+  font-size: clamp(50px, 12vw, 68px);
+
+  line-height: 0.85;
+
+  letter-spacing: 1px;
+}
+
+.date-display {
+  position: relative;
+
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 5px 0;
+}
+
+.date-day {
+  font-family: 'Playfair Display', serif;
+
+  font-size: 86px;
+
+  line-height: 0.85;
+
+  font-weight: 500;
+
+  color: #eee;
+
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.15),
+    0 0 35px rgba(255,255,255,0.08);
+}
+
+.date-month {
+  margin-top: 10px;
+
+  font-size: 11px;
+
+  letter-spacing: 7px;
+
+  color: #999;
+}
+
+.date-line {
+  position: relative;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  width: 170px;
+
+  margin: 18px 0;
+}
+
+.date-line span {
+  height: 1px;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      #777
+    );
+}
+
+.date-line span:last-child {
+  background:
+    linear-gradient(
+      to left,
+      transparent,
+      #777
+    );
+}
+
+.date-line i {
+  font-style: normal;
+
+  font-size: 8px;
+
+  color: #ddd;
+
+  text-shadow:
+    0 0 8px rgba(255,255,255,0.7);
 }
 
 
@@ -492,44 +1208,51 @@ button:hover,
    ========================================================= */
 
 .event-time {
-
   position: relative;
-  z-index: 2;
+
+  z-index: 10;
 
   display: flex;
 
   align-items: center;
+  justify-content: center;
 
-  gap: 10px;
+  gap: 22px;
 
-  margin: 22px 0 15px;
-
-  color: #aaa;
+  margin: 3px 0 18px;
 }
 
+.event-time div {
+  display: flex;
 
-.event-time span {
-
-  font-size: 8px;
-
-  letter-spacing: 2px;
-
-  color: #777;
+  flex-direction: column;
+  align-items: center;
 }
 
+.event-time small {
+  font-size: 7px;
+
+  letter-spacing: 3px;
+
+  color: #666;
+
+  margin-bottom: 5px;
+}
 
 .event-time strong {
-
   font-family: 'Playfair Display', serif;
 
-  font-size: 22px;
+  font-size: 25px;
 
   font-weight: 500;
 
   color: #ddd;
+}
 
-  text-shadow:
-    0 0 10px rgba(255,255,255,0.15);
+.time-divider {
+  color: #555;
+
+  font-size: 18px;
 }
 
 
@@ -538,53 +1261,50 @@ button:hover,
    ========================================================= */
 
 .countdown-container {
-
   position: relative;
-  z-index: 2;
 
-  margin: 10px 0 20px;
+  z-index: 10;
+
+  width: min(340px, 90vw);
+
+  padding: 14px 10px;
+
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  margin: 0 0 15px;
 }
 
-
 .countdown-title {
+  font-size: 7px;
 
-  font-size: 8px;
-
-  letter-spacing: 4px;
+  letter-spacing: 3px;
 
   color: #666;
 
   margin-bottom: 12px;
 }
 
-
 .countdown {
-
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 }
 
-
 .countdown-item {
-
   display: flex;
 
   flex-direction: column;
-
   align-items: center;
 
   min-width: 48px;
 }
 
-
 .countdown-item strong {
-
   font-family: 'Playfair Display', serif;
 
-  font-size: 27px;
+  font-size: 25px;
 
   font-weight: 500;
 
@@ -600,18 +1320,14 @@ button:hover,
     text-shadow 0.25s ease;
 }
 
-
 .countdown-item strong.tick {
-
   transform: scale(1.15);
 
   text-shadow:
     0 0 15px rgba(255,255,255,0.5);
 }
 
-
 .countdown-item span {
-
   margin-top: 6px;
 
   font-size: 7px;
@@ -621,34 +1337,14 @@ button:hover,
   color: #666;
 }
 
-
 .countdown-separator {
-
   font-family: 'Playfair Display', serif;
 
   font-size: 20px;
 
-  color: #555;
+  color: #444;
 
   margin: 0 4px 12px;
-}
-
-
-.event-today {
-
-  font-family: 'Playfair Display', serif;
-
-  font-size: 30px;
-
-  color: #eee;
-
-  letter-spacing: 3px;
-
-  text-shadow:
-    0 0 15px rgba(255,255,255,0.4);
-
-  animation:
-    todayPulse 2s infinite ease-in-out;
 }
 
 
@@ -657,22 +1353,33 @@ button:hover,
    ========================================================= */
 
 .event-location {
-
   position: relative;
-  z-index: 2;
+
+  z-index: 10;
 
   width: min(350px, 90vw);
 
-  border-top: 1px solid #333;
+  padding: 5px 10px;
 
-  padding: 17px 10px 5px;
-
-  margin-top: 5px;
+  margin-top: 0;
 }
 
+.event-location::before {
+  content: "✦";
+
+  position: absolute;
+
+  left: 50%;
+  top: -8px;
+
+  transform: translateX(-50%);
+
+  font-size: 7px;
+
+  color: #666;
+}
 
 .event-location span {
-
   display: block;
 
   font-size: 8px;
@@ -684,26 +1391,27 @@ button:hover,
   margin-bottom: 7px;
 }
 
-
 .event-location strong {
-
   font-family: 'Playfair Display', serif;
 
-  font-size: 25px;
+  font-size: 23px;
 
   font-weight: 500;
 }
 
-
 .event-location p {
-
   margin-top: 6px;
 
   font-size: 10px;
 
   color: #777;
+
+  letter-spacing: 0.5px;
 }
 
+.details-screen .main-button {
+  margin-top: 8px;
+}
 
 .details-screen .secondary {
   margin-top: 10px;
@@ -714,38 +1422,91 @@ button:hover,
    DRESS CODE
    ========================================================= */
 
-.symbol {
-
+.dress-symbol {
   position: relative;
-  z-index: 2;
 
-  font-size: 48px;
+  width: 110px;
+  height: 110px;
 
-  color: #ddd;
+  margin: 10px 0 20px;
 
-  margin: 25px 0;
+  display: flex;
 
-  text-shadow:
-    0 0 8px rgba(255,255,255,0.5),
-    0 0 25px rgba(255,255,255,0.2);
+  align-items: center;
+  justify-content: center;
 
-  animation:
-    symbolGlow 2.5s infinite ease-in-out;
+  z-index: 10;
 }
 
-
-.dresscode p {
-
+.dress-symbol > span {
   position: relative;
-  z-index: 2;
 
-  font-size: 12px;
+  z-index: 3;
 
-  line-height: 2;
+  font-size: 28px;
 
-  color: #999;
+  color: #eee;
 
-  margin: 30px 0;
+  text-shadow:
+    0 0 12px rgba(255,255,255,0.6);
+}
+
+.dress-ring {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.ring-one {
+  animation:
+    dressRingPulse 3s infinite ease-in-out;
+}
+
+.ring-two {
+  inset: 13px;
+
+  border-color: rgba(255,255,255,0.08);
+
+  animation:
+    dressRingRotate 10s infinite linear;
+}
+
+.dress-line {
+  width: 45px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      #888,
+      transparent
+    );
+
+  margin: 0 0 5px;
+}
+
+.dress-note {
+  position: relative;
+
+  z-index: 10;
+
+  font-size: 7px;
+
+  letter-spacing: 3px;
+
+  color: #555;
+
+  margin-bottom: 25px;
+}
+
+.dresscode .message {
+  margin: 20px 0;
 }
 
 
@@ -753,35 +1514,77 @@ button:hover,
    RSVP
    ========================================================= */
 
-.rsvp-buttons {
-
+.rsvp-top-symbol {
   position: relative;
-  z-index: 5;
+
+  z-index: 10;
+
+  font-size: 10px;
+
+  color: #aaa;
+
+  margin-bottom: 12px;
+
+  animation:
+    topSymbolPulse 3s infinite ease-in-out;
+}
+
+.rsvp .message {
+  margin: 20px 0 28px;
+}
+
+.rsvp-buttons {
+  position: relative;
+
+  z-index: 10;
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 15px;
+  gap: 12px;
 
   width: min(300px, 90vw);
 
-  margin-top: 10px;
+  margin-top: 0;
 }
 
-
 .rsvp-btn {
+  display: flex;
 
-  display: block;
+  align-items: center;
+  justify-content: space-between;
 
   width: 100%;
 
-  text-decoration: none;
+  padding: 16px 20px;
+
+  text-align: left;
+
+  letter-spacing: 2px;
 }
 
+.rsvp-btn span {
+  font-size: 9px;
+}
 
-.yes {
+.rsvp-btn small {
+  font-size: 16px;
 
+  color: #888;
+
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.rsvp-btn:hover small {
+  color: #111;
+
+  transform: scale(1.3);
+}
+
+.rsvp-btn.yes {
   background: rgba(255,255,255,0.04);
 
   color: #eee;
@@ -789,36 +1592,20 @@ button:hover,
   border-color: #888;
 }
 
-
-.no {
-
+.rsvp-btn.no {
   background: rgba(255,255,255,0.01);
 
   color: #aaa;
 
   border-color: #444;
+
+  opacity: 0.7;
 }
-
-
-.rsvp-btn.yes:hover {
-
-  background: #eee;
-
-  color: #050505;
-
-  box-shadow:
-    0 0 20px rgba(255,255,255,0.35);
-}
-
-
-/* =========================================================
-   RISPOSTA RSVP
-   ========================================================= */
 
 .rsvp-response {
-
   position: relative;
-  z-index: 6;
+
+  z-index: 10;
 
   display: none;
 
@@ -826,19 +1613,16 @@ button:hover,
 
   align-items: center;
 
-  margin-top: 25px;
+  margin-top: 10px;
 
   animation: responseIn 0.8s ease both;
 }
-
 
 .rsvp-response.show {
   display: flex;
 }
 
-
 .response-symbol {
-
   font-size: 38px;
 
   color: #fff;
@@ -850,39 +1634,34 @@ button:hover,
     0 0 30px rgba(255,255,255,0.2);
 }
 
-
 .rsvp-response h3 {
-
   font-family: 'Playfair Display', serif;
 
-  font-size: 30px;
+  font-size: 27px;
 
   font-weight: 500;
+
+  letter-spacing: 1px;
 
   color: #eee;
 
   margin-bottom: 8px;
 }
 
-
 .rsvp-response p {
-
   font-size: 10px;
 
   line-height: 1.8;
 
   color: #888;
+
+  margin-top: 5px;
 }
 
-
-/* =========================================================
-   FIRMA FINALE
-   ========================================================= */
-
 .final-signature {
-
   position: relative;
-  z-index: 2;
+
+  z-index: 10;
 
   display: flex;
 
@@ -890,7 +1669,7 @@ button:hover,
 
   align-items: center;
 
-  margin-top: 35px;
+  margin-top: 28px;
 
   color: #555;
 
@@ -899,17 +1678,13 @@ button:hover,
     text-shadow 0.5s ease;
 }
 
-
 .final-signature span {
-
   font-size: 8px;
 
   letter-spacing: 4px;
 }
 
-
 .final-signature strong {
-
   font-family: 'Playfair Display', serif;
 
   font-size: 25px;
@@ -919,9 +1694,7 @@ button:hover,
   margin-top: 7px;
 }
 
-
 .rsvp-response.show ~ .final-signature {
-
   color: #999;
 
   text-shadow:
@@ -930,11 +1703,10 @@ button:hover,
 
 
 /* =========================================================
-   PARTICELLE
+   PARTICELLE RSVP
    ========================================================= */
 
 .celebration-particles {
-
   position: fixed;
 
   inset: 0;
@@ -946,13 +1718,10 @@ button:hover,
   overflow: hidden;
 }
 
-
 .particle {
-
   position: absolute;
 
   top: 50%;
-
   left: 50%;
 
   width: 5px;
@@ -969,13 +1738,7 @@ button:hover,
     particleBurst 1.8s ease-out forwards;
 }
 
-
-/* =========================================================
-   FLASH ARGENTATO
-   ========================================================= */
-
 .rsvp-flash {
-
   position: fixed;
 
   inset: 0;
@@ -994,9 +1757,7 @@ button:hover,
   opacity: 0;
 }
 
-
 .rsvp-flash.active {
-
   animation:
     flashEffect 1s ease-out forwards;
 }
@@ -1007,7 +1768,6 @@ button:hover,
    ========================================================= */
 
 @keyframes ambientLight {
-
   0% {
     transform: translate(-3%, -2%) scale(1);
   }
@@ -1021,9 +1781,52 @@ button:hover,
   }
 }
 
+@keyframes beamMove {
+  0% {
+    transform:
+      rotate(20deg)
+      translateX(-30px);
+
+    opacity: 0.25;
+  }
+
+  50% {
+    transform:
+      rotate(-5deg)
+      translateX(40px);
+
+    opacity: 0.65;
+  }
+
+  100% {
+    transform:
+      rotate(20deg)
+      translateX(-30px);
+
+    opacity: 0.25;
+  }
+}
+
+@keyframes ambientPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.9);
+  }
+
+  50% {
+    opacity: 0.85;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1.08);
+  }
+}
 
 @keyframes elementIn {
-
   from {
     opacity: 0;
 
@@ -1045,9 +1848,7 @@ button:hover,
   }
 }
 
-
 @keyframes contentReveal {
-
   from {
     opacity: 0;
 
@@ -1065,9 +1866,7 @@ button:hover,
   }
 }
 
-
-@keyframes chromeShine {
-
+@keyframes chromeMovement {
   0% {
     background-position: 0% center;
   }
@@ -1077,69 +1876,93 @@ button:hover,
   }
 }
 
-
-@keyframes numberPulse {
-
+@keyframes heroNumberGlow {
   0%,
   100% {
-
     filter:
-      drop-shadow(0 0 6px rgba(255,255,255,0.12));
+      drop-shadow(0 2px 2px rgba(0,0,0,0.8))
+      drop-shadow(0 0 7px rgba(255,255,255,0.12));
   }
 
   50% {
-
     filter:
-      drop-shadow(0 0 22px rgba(255,255,255,0.32));
+      drop-shadow(0 2px 2px rgba(0,0,0,0.8))
+      drop-shadow(0 0 15px rgba(255,255,255,0.28));
   }
 }
 
-
-@keyframes ageGlow {
-
+@keyframes heroFloat {
   0%,
   100% {
-
-    text-shadow:
-      0 0 8px rgba(255,255,255,0.12);
+    transform: translateY(0);
   }
 
   50% {
-
-    text-shadow:
-      0 0 18px rgba(255,255,255,0.30),
-      0 0 35px rgba(255,255,255,0.12);
+    transform: translateY(-4px);
   }
 }
 
-
-@keyframes symbolGlow {
-
+@keyframes starTwinkle {
   0%,
   100% {
+    opacity: 0.25;
 
     transform:
-      scale(0.95)
+      scale(0.8)
       rotate(0deg);
-
-    opacity: 0.65;
   }
 
   50% {
+    opacity: 1;
 
     transform:
-      scale(1.15)
-      rotate(8deg);
-
-    opacity: 1;
+      scale(1.35)
+      rotate(12deg);
   }
 }
 
+@keyframes dotFloat {
+  0%,
+  100% {
+    opacity: 0.25;
+
+    transform:
+      translate(0, 0)
+      scale(0.7);
+  }
+
+  50% {
+    opacity: 0.9;
+
+    transform:
+      translate(8px, -12px)
+      scale(1.3);
+  }
+}
+
+@keyframes orbitPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-18deg)
+      scale(0.96);
+  }
+
+  50% {
+    opacity: 0.7;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-18deg)
+      scale(1.02);
+  }
+}
 
 @keyframes sparkleFloat {
-
   0% {
-
     opacity: 0.25;
 
     transform:
@@ -1148,7 +1971,6 @@ button:hover,
   }
 
   50% {
-
     opacity: 0.8;
 
     transform:
@@ -1157,7 +1979,6 @@ button:hover,
   }
 
   100% {
-
     opacity: 0.25;
 
     transform:
@@ -1166,9 +1987,7 @@ button:hover,
   }
 }
 
-
 @keyframes sparkleMove {
-
   0% {
     transform: translateX(-15px);
   }
@@ -1178,11 +1997,8 @@ button:hover,
   }
 }
 
-
 @keyframes sparkleTwinkle {
-
   0% {
-
     opacity: 0.12;
 
     transform:
@@ -1191,7 +2007,6 @@ button:hover,
   }
 
   50% {
-
     opacity: 0.7;
 
     transform:
@@ -1200,7 +2015,6 @@ button:hover,
   }
 
   100% {
-
     opacity: 0.12;
 
     transform:
@@ -1209,9 +2023,7 @@ button:hover,
   }
 }
 
-
 @keyframes sparkleRotate {
-
   from {
     transform: rotate(0deg) scale(1);
   }
@@ -1221,966 +2033,92 @@ button:hover,
   }
 }
 
-
-@keyframes responseIn {
-
-  from {
-
-    opacity: 0;
-
-    transform:
-      translateY(20px)
-      scale(0.9);
-
-    filter: blur(5px);
+@keyframes ageGlow {
+  0%,
+  100% {
+    text-shadow:
+      0 0 8px rgba(255,255,255,0.12);
   }
 
-  to {
+  50% {
+    text-shadow:
+      0 0 18px rgba(255,255,255,0.30),
+      0 0 35px rgba(255,255,255,0.12);
+  }
+}
 
-    opacity: 1;
-
+@keyframes discoFloat {
+  0%,
+  100% {
     transform:
       translateY(0)
-      scale(1);
-
-    filter: blur(0);
-  }
-}
-
-
-@keyframes particleBurst {
-
-  0% {
-
-    opacity: 1;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-  }
-
-  100% {
-
-    opacity: 0;
-
-    transform:
-      translate(
-        calc(-50% + var(--x)),
-        calc(-50% + var(--y))
-      )
-      rotate(360deg)
-      scale(0.2);
-  }
-}
-
-
-@keyframes flashEffect {
-
-  0% {
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 0.8;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-
-@keyframes todayPulse {
-
-  0%,
-  100% {
-    opacity: 0.65;
-    transform: scale(0.98);
+      rotate(-2deg);
   }
 
   50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-  .screen {
-    padding: 25px;
-  }
-
-
-  .intro h1 {
-    font-size: 135px;
-  }
-
-
-  .names {
-    font-size: 11px;
-
-    letter-spacing: 4px;
-  }
-
-
-  .invitation h2,
-  .details-screen h2,
-  .dresscode h2,
-  .rsvp h2 {
-
-    font-size: 50px;
-  }
-
-
-  .age {
-    font-size: 95px;
-  }
-
-
-  .background-lights::after {
-
-    font-size: 12px;
-
-    letter-spacing: 20px;
-  }
-
-
-  .event-time {
-    gap: 7px;
-  }
-
-
-  .event-time strong {
-    font-size: 20px;
-  }
-
-
-  .countdown-item {
-    min-width: 43px;
-  }
-
-
-  .countdown-item strong {
-    font-size: 24px;
-  }
-
-
-  .countdown-separator {
-    margin-left: 1px;
-    margin-right: 1px;
-  }
-
-
-  .rsvp-response h3 {
-    font-size: 25px;
-  }
-
-
-  .final-signature {
-    margin-top: 25px;
-  }
-}
-/* =========================================================
-   LUXURY NIGHTCLUB EFFECT
-   ========================================================= */
-
-.club-lights {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-
-/* FASCI DI LUCE */
-
-.light-beam {
-  position: absolute;
-
-  width: 35vw;
-  height: 130vh;
-
-  top: -20vh;
-
-  background:
-    linear-gradient(
-      to bottom,
-      transparent,
-      rgba(255,255,255,0.08),
-      rgba(255,255,255,0.025),
-      transparent
-    );
-
-  filter: blur(18px);
-
-  opacity: 0.55;
-
-  transform-origin: top center;
-
-  animation:
-    beamMove 9s infinite ease-in-out;
-}
-
-
-/* FASCIO SINISTRO */
-
-.beam-left {
-  left: 5%;
-  transform: rotate(25deg);
-}
-
-
-/* FASCIO DESTRO */
-
-.beam-right {
-  right: 5%;
-  transform: rotate(-25deg);
-
-  animation-delay: -4s;
-}
-
-
-/* ALONE AMBIENTALE */
-
-.ambient-glow {
-  position: absolute;
-
-  width: 55vw;
-  height: 55vw;
-
-  max-width: 650px;
-  max-height: 650px;
-
-  left: 50%;
-  top: 48%;
-
-  transform: translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,0.08) 0%,
-      rgba(255,255,255,0.035) 30%,
-      transparent 70%
-    );
-
-  filter: blur(10px);
-
-  animation:
-    ambientPulse 5s infinite ease-in-out;
-
-  pointer-events: none;
-
-  z-index: 0;
-}
-
-
-/* =========================================================
-   ALONE CIRCOLARE DEL 18
-   ========================================================= */
-
-.number-halo {
-
-  position: absolute;
-
-  width: 270px;
-  height: 270px;
-
-  left: 50%;
-  top: 48%;
-
-  transform:
-    translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  border:
-    1px solid rgba(255,255,255,0.18);
-
-  box-shadow:
-    0 0 20px rgba(255,255,255,0.08),
-    inset 0 0 20px rgba(255,255,255,0.04);
-
-  animation:
-    haloPulse 4s infinite ease-in-out;
-
-  pointer-events: none;
-
-  z-index: 0;
-}
-
-
-/* SECONDO ANEL */
-
-.number-halo::before {
-
-  content: "";
-
-  position: absolute;
-
-  inset: 12px;
-
-  border-radius: 50%;
-
-  border:
-    1px solid rgba(255,255,255,0.07);
-
-  animation:
-    haloRotate 15s infinite linear;
-}
-
-
-/* PICCOLO BAGLIORE */
-
-.number-halo::after {
-
-  content: "✦";
-
-  position: absolute;
-
-  top: -7px;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  font-size: 12px;
-
-  color: #fff;
-
-  text-shadow:
-    0 0 10px rgba(255,255,255,0.8);
-}
-
-
-/* =========================================================
-   NOME PIÙ LUXURY
-   ========================================================= */
-
-.names {
-
-  position: relative;
-
-  letter-spacing: 7px;
-
-  color: #ddd;
-
-  text-shadow:
-    0 0 8px rgba(255,255,255,0.12);
-}
-
-
-.names::before,
-.names::after {
-
-  content: "";
-
-  display: block;
-
-  width: 55px;
-  height: 1px;
-
-  margin: 12px auto;
-
-  background:
-    linear-gradient(
-      to right,
-      transparent,
-      #777,
-      transparent
-    );
-
-  opacity: 0.7;
-}
-
-
-/* =========================================================
-   BAGLIORE DEL NUMERO
-   ========================================================= */
-
-.intro h1 {
-
-  position: relative;
-
-  z-index: 2;
-
-  text-shadow:
-    0 0 10px rgba(255,255,255,0.15),
-    0 0 35px rgba(255,255,255,0.08);
-}
-
-
-/* =========================================================
-   ANIMAZIONI
-   ========================================================= */
-
-@keyframes beamMove {
-
-  0% {
-
     transform:
-      rotate(20deg)
-      translateX(-30px);
+      translateY(8px)
+      rotate(3deg);
+  }
+}
 
-    opacity: 0.25;
+@keyframes mirrorRotate {
+  0% {
+    transform:
+      rotate(8deg)
+      scale(1);
   }
 
   50% {
-
     transform:
-      rotate(-5deg)
-      translateX(40px);
-
-    opacity: 0.65;
+      rotate(-8deg)
+      scale(1.02);
   }
 
   100% {
-
     transform:
-      rotate(20deg)
-      translateX(-30px);
-
-    opacity: 0.25;
+      rotate(8deg)
+      scale(1);
   }
 }
 
-
-@keyframes ambientPulse {
-
+@keyframes ballReflection {
   0%,
   100% {
-
-    opacity: 0.45;
-
     transform:
-      translate(-50%, -50%)
+      translate(0,0)
       scale(0.9);
+
+    opacity: 0.5;
   }
 
   50% {
-
-    opacity: 0.85;
-
     transform:
-      translate(-50%, -50%)
-      scale(1.08);
+      translate(12px,8px)
+      scale(1.1);
+
+    opacity: 1;
   }
 }
 
-
-@keyframes haloPulse {
-
+@keyframes shinePulse {
   0%,
   100% {
-
     opacity: 0.45;
 
     transform:
-      translate(-50%, -50%)
-      scale(0.94);
-
-    box-shadow:
-      0 0 15px rgba(255,255,255,0.06),
-      inset 0 0 15px rgba(255,255,255,0.03);
+      scale(0.8);
   }
 
   50% {
-
-    opacity: 0.9;
+    opacity: 1;
 
     transform:
-      translate(-50%, -50%)
-      scale(1.04);
-
-    box-shadow:
-      0 0 35px rgba(255,255,255,0.15),
-      inset 0 0 25px rgba(255,255,255,0.06);
+      scale(1.4);
   }
 }
-
-
-@keyframes haloRotate {
-
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-  .light-beam {
-
-    width: 55vw;
-
-    filter: blur(15px);
-
-    opacity: 0.45;
-  }
-
-
-  .number-halo {
-
-    width: 230px;
-    height: 230px;
-  }
-
-
-  .names {
-
-    letter-spacing: 5px;
-  }
-}
-/* =========================================================
-   DETTAGLI — LUXURY
-   ========================================================= */
-
-.date-display {
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  margin: 5px 0 5px;
-}
-
-
-.date-day {
-  font-family: 'Playfair Display', serif;
-
-  font-size: 86px;
-
-  line-height: 0.85;
-
-  font-weight: 500;
-
-  color: #eee;
-
-  text-shadow:
-    0 0 12px rgba(255,255,255,0.15),
-    0 0 35px rgba(255,255,255,0.08);
-}
-
-
-.date-month {
-  margin-top: 10px;
-
-  font-size: 11px;
-
-  letter-spacing: 7px;
-
-  color: #999;
-}
-
-
-.date-line {
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 10px;
-
-  width: 170px;
-
-  margin: 18px 0;
-}
-
-
-.date-line span {
-  height: 1px;
-
-  flex: 1;
-
-  background:
-    linear-gradient(
-      to right,
-      transparent,
-      #777
-    );
-}
-
-
-.date-line span:last-child {
-  background:
-    linear-gradient(
-      to left,
-      transparent,
-      #777
-    );
-}
-
-
-.date-line i {
-  font-style: normal;
-
-  font-size: 8px;
-
-  color: #ddd;
-
-  text-shadow:
-    0 0 8px rgba(255,255,255,0.7);
-}
-
-
-/* =========================================================
-   ORARIO
-   ========================================================= */
-
-.event-time {
-  position: relative;
-  z-index: 2;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 22px;
-
-  margin: 3px 0 18px;
-}
-
-
-.event-time div {
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-}
-
-
-.event-time small {
-  font-size: 7px;
-
-  letter-spacing: 3px;
-
-  color: #666;
-
-  margin-bottom: 5px;
-}
-
-
-.event-time strong {
-  font-family: 'Playfair Display', serif;
-
-  font-size: 25px;
-
-  font-weight: 500;
-
-  color: #ddd;
-}
-
-
-.time-divider {
-  color: #555;
-
-  font-size: 18px;
-}
-
-
-/* =========================================================
-   COUNTDOWN PREMIUM
-   ========================================================= */
-
-.countdown-container {
-  position: relative;
-  z-index: 2;
-
-  width: min(340px, 90vw);
-
-  padding: 14px 10px;
-
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-
-  margin: 0 0 15px;
-}
-
-
-.countdown-title {
-  font-size: 7px;
-
-  letter-spacing: 3px;
-
-  color: #666;
-
-  margin-bottom: 12px;
-}
-
-
-.countdown-item strong {
-  font-size: 25px;
-
-  color: #eee;
-}
-
-
-.countdown-separator {
-  color: #444;
-}
-
-
-/* =========================================================
-   LOCATION
-   ========================================================= */
-
-.event-location {
-  border-top: none;
-
-  position: relative;
-
-  padding: 5px 10px;
-
-  margin-top: 0;
-}
-
-
-.event-location::before {
-  content: "✦";
-
-  position: absolute;
-
-  left: 50%;
-  top: -8px;
-
-  transform: translateX(-50%);
-
-  font-size: 7px;
-
-  color: #666;
-}
-
-
-.event-location strong {
-  font-size: 23px;
-}
-
-
-.event-location p {
-  letter-spacing: 0.5px;
-}
-
-
-/* =========================================================
-   DRESS CODE
-   ========================================================= */
-
-.dress-symbol {
-  position: relative;
-
-  width: 110px;
-  height: 110px;
-
-  margin: 10px 0 20px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  z-index: 2;
-}
-
-
-.dress-symbol > span {
-  position: relative;
-
-  z-index: 3;
-
-  font-size: 28px;
-
-  color: #eee;
-
-  text-shadow:
-    0 0 12px rgba(255,255,255,0.6);
-}
-
-
-.dress-ring {
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255,255,255,0.15);
-}
-
-
-.ring-one {
-  animation:
-    dressRingPulse 3s infinite ease-in-out;
-}
-
-
-.ring-two {
-  inset: 13px;
-
-  border-color: rgba(255,255,255,0.08);
-
-  animation:
-    dressRingRotate 10s infinite linear;
-}
-
-
-.dress-line {
-  width: 45px;
-
-  height: 1px;
-
-  background:
-    linear-gradient(
-      to right,
-      transparent,
-      #888,
-      transparent
-    );
-
-  margin: 0 0 5px;
-}
-
-
-.dress-note {
-  position: relative;
-  z-index: 2;
-
-  font-size: 7px;
-
-  letter-spacing: 3px;
-
-  color: #555;
-
-  margin-bottom: 25px;
-}
-
-
-/* =========================================================
-   RSVP
-   ========================================================= */
-
-.rsvp-top-symbol {
-  position: relative;
-
-  z-index: 2;
-
-  font-size: 10px;
-
-  color: #aaa;
-
-  margin-bottom: 12px;
-
-  animation:
-    topSymbolPulse 3s infinite ease-in-out;
-}
-
-
-.rsvp .message {
-  margin: 20px 0 28px;
-}
-
-
-.rsvp-buttons {
-  gap: 12px;
-
-  margin-top: 0;
-}
-
-
-.rsvp-btn {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  padding: 16px 20px;
-
-  text-align: left;
-
-  letter-spacing: 2px;
-}
-
-
-.rsvp-btn span {
-  font-size: 9px;
-}
-
-
-.rsvp-btn small {
-  font-size: 16px;
-
-  color: #888;
-
-  transition:
-    transform 0.3s ease,
-    color 0.3s ease;
-}
-
-
-.rsvp-btn:hover small {
-  color: #111;
-
-  transform: scale(1.3);
-}
-
-
-.rsvp-btn.no {
-  opacity: 0.7;
-}
-
-
-.rsvp-response {
-  margin-top: 10px;
-}
-
-
-.rsvp-response h3 {
-  font-size: 27px;
-
-  letter-spacing: 1px;
-}
-
-
-.rsvp-response p {
-  margin-top: 5px;
-}
-
-
-.final-signature {
-  margin-top: 28px;
-}
-
-
-/* =========================================================
-   ANIMAZIONI
-   ========================================================= */
 
 @keyframes dressRingPulse {
-
   0%,
   100% {
     transform: scale(0.9);
@@ -2198,9 +2136,7 @@ button:hover,
   }
 }
 
-
 @keyframes dressRingRotate {
-
   from {
     transform: rotate(0deg);
   }
@@ -2210,9 +2146,7 @@ button:hover,
   }
 }
 
-
 @keyframes topSymbolPulse {
-
   0%,
   100% {
     opacity: 0.35;
@@ -2227,504 +2161,80 @@ button:hover,
   }
 }
 
+@keyframes responseIn {
+  from {
+    opacity: 0;
 
-/* =========================================================
-   MOBILE
-   ========================================================= */
+    transform:
+      translateY(20px)
+      scale(0.9);
 
-@media (max-width: 600px) {
-
-  .date-day {
-    font-size: 76px;
+    filter: blur(5px);
   }
 
+  to {
+    opacity: 1;
 
-  .date-month {
-    font-size: 10px;
+    transform:
+      translateY(0)
+      scale(1);
 
-    letter-spacing: 6px;
-  }
-
-
-  .date-line {
-    width: 150px;
-
-    margin: 14px 0;
-  }
-
-
-  .event-time {
-    gap: 17px;
-  }
-
-
-  .event-time strong {
-    font-size: 22px;
-  }
-
-
-  .countdown-container {
-    width: 310px;
-  }
-
-
-  .countdown-item {
-    min-width: 40px;
-  }
-
-
-  .countdown-item strong {
-    font-size: 22px;
-  }
-
-
-  .dress-symbol {
-    width: 95px;
-    height: 95px;
+    filter: blur(0);
   }
 }
-/* =========================================================
-   HERO 18 — EFFETTO CROMO
-   ========================================================= */
 
-.hero-number {
-  position: relative;
-
-  z-index: 3;
-
-  display: inline-block;
-
-  overflow: hidden;
-
-  padding: 15px 20px 25px;
-
-  line-height: 1;
-}
-
-
-/* NUMERO */
-
-.hero-number span {
-
-  display: block;
-
-  font-family: 'Playfair Display', serif;
-
-  font-size: clamp(130px, 34vw, 190px);
-
-  font-weight: 500;
-
-  line-height: 1;
-
-  letter-spacing: -6px;
-
-  background:
-    linear-gradient(
-      110deg,
-      #555 0%,
-      #aaa 18%,
-      #fff 32%,
-      #777 43%,
-      #eee 53%,
-      #999 67%,
-      #fff 78%,
-      #555 100%
-    );
-
-  background-size: 220% 100%;
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  color: transparent;
-
-  filter:
-    drop-shadow(0 0 7px rgba(255,255,255,0.16))
-    drop-shadow(0 0 25px rgba(255,255,255,0.07));
-
-  animation:
-    chromeMovement 5s infinite linear,
-    heroNumberGlow 4s infinite ease-in-out;
-}
-
-
-/* =========================================================
-   RIFLESSO CHE ATTRAVERSA IL NUMERO
-   ========================================================= */
-
-.number-shine {
-
-  position: absolute;
-
-  top: -20%;
-
-  left: -80%;
-
-  width: 35%;
-
-  height: 150%;
-
-  transform: rotate(18deg);
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,0.05),
-      rgba(255,255,255,0.8),
-      rgba(255,255,255,0.05),
-      transparent
-    );
-
-  filter: blur(5px);
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  animation:
-    numberReflection 5s infinite ease-in-out;
-}
-
-
-/* =========================================================
-   PICCOLO BAGLIORE INTORNO AL NUMERO
-   ========================================================= */
-
-.hero-number::before {
-
-  content: "";
-
-  position: absolute;
-
-  inset: 20px;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(255,255,255,0.08),
-      transparent 65%
-    );
-
-  filter: blur(15px);
-
-  opacity: 0.7;
-
-  z-index: -1;
-
-  animation:
-    heroAura 4s infinite ease-in-out;
-}
-
-
-/* =========================================================
-   ANIMAZIONI
-   ========================================================= */
-
-@keyframes chromeMovement {
-
+@keyframes particleBurst {
   0% {
-    background-position: 0% center;
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
   }
 
   100% {
-    background-position: 220% center;
+    opacity: 0;
+
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      rotate(360deg)
+      scale(0.2);
   }
 }
 
-
-@keyframes heroNumberGlow {
-
-  0%,
-  100% {
-
-    filter:
-      drop-shadow(0 0 7px rgba(255,255,255,0.12))
-      drop-shadow(0 0 20px rgba(255,255,255,0.05));
-  }
-
-  50% {
-
-    filter:
-      drop-shadow(0 0 12px rgba(255,255,255,0.3))
-      drop-shadow(0 0 35px rgba(255,255,255,0.12));
-  }
-}
-
-
-@keyframes numberReflection {
-
+@keyframes flashEffect {
   0% {
-
-    left: -80%;
-
     opacity: 0;
   }
 
-  15% {
-
-    opacity: 0;
-  }
-
-  30% {
-
+  20% {
     opacity: 0.8;
   }
 
-  48% {
-
-    left: 145%;
-
-    opacity: 0;
-  }
-
   100% {
-
-    left: 145%;
-
     opacity: 0;
   }
 }
-
-
-@keyframes heroAura {
-
-  0%,
-  100% {
-
-    opacity: 0.3;
-
-    transform: scale(0.9);
-  }
-
-  50% {
-
-    opacity: 0.8;
-
-    transform: scale(1.1);
-  }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-  .hero-number {
-    padding:
-      12px
-      15px
-      20px;
-  }
-
-
-  .hero-number span {
-
-    font-size: 135px;
-
-    letter-spacing: -5px;
-  }
-}
-/* =========================================================
-   SCHERMATA ACCESSO
-   ========================================================= */
-
-.access-screen {
-  background:
-    radial-gradient(
-      circle at center,
-      #202020 0%,
-      #090909 48%,
-      #000 100%
-    );
-}
-
-
-.access-content {
-  position: relative;
-
-  z-index: 5;
-
-  width: min(400px, 90vw);
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-}
-
-
-.access-symbol {
-  font-size: 13px;
-
-  color: #ddd;
-
-  margin-bottom: 25px;
-
-  text-shadow:
-    0 0 12px rgba(255,255,255,0.5);
-
-  animation:
-    accessSymbolPulse 3s infinite ease-in-out;
-}
-
-
-.access-content h2 {
-
-  font-family:
-    'Playfair Display',
-    serif;
-
-  font-size: 43px;
-
-  line-height: 0.95;
-
-  font-weight: 500;
-
-  letter-spacing: 1px;
-
-  color: #eee;
-
-  text-shadow:
-    0 0 20px rgba(255,255,255,0.08);
-
-  margin-bottom: 25px;
-}
-
-
-.access-message {
-
-  font-size: 11px;
-
-  line-height: 1.9;
-
-  color: #888;
-
-  margin-bottom: 22px;
-}
-
-
-.code-box {
-  position: relative;
-
-  width: 220px;
-
-  margin-bottom: 18px;
-}
-
-
-.code-box input {
-
-  width: 100%;
-
-  height: 50px;
-
-  border: none;
-
-  border-bottom:
-    1px solid #555;
-
-  background:
-    transparent;
-
-  color: #fff;
-
-  text-align: center;
-
-  font-family:
-    'Montserrat',
-    sans-serif;
-
-  font-size: 20px;
-
-  letter-spacing: 9px;
-
-  outline: none;
-
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-
-.code-box input:focus {
-
-  border-bottom-color: #ddd;
-
-  box-shadow:
-    0 8px 20px -15px rgba(255,255,255,0.5);
-}
-
-
-.code-box input::placeholder {
-
-  color: #444;
-
-  letter-spacing: 8px;
-}
-
-
-.access-button {
-
-  margin-top: 5px;
-}
-
-
-.access-error {
-
-  min-height: 20px;
-
-  margin-top: 15px;
-
-  font-size: 9px;
-
-  letter-spacing: 1px;
-
-  color: #888;
-}
-
-
-/* =========================================================
-   CODICE ERRATO
-   ========================================================= */
-
-.code-box input.wrong {
-
-  animation:
-    codeShake 0.35s ease;
-
-  border-bottom-color: #aaa;
-}
-
-
-/* =========================================================
-   ANIMAZIONI ACCESSO
-   ========================================================= */
 
 @keyframes accessSymbolPulse {
-
   0%,
   100% {
-
     opacity: 0.35;
 
     transform: scale(0.9);
   }
 
   50% {
-
     opacity: 1;
 
     transform: scale(1.15);
   }
 }
 
-
 @keyframes codeShake {
-
   0% {
     transform: translateX(0);
   }
@@ -2753,16 +2263,188 @@ button:hover,
 
 @media (max-width: 600px) {
 
+  .screen {
+    padding: 25px;
+  }
+
+
+  /* ACCESSO */
+
   .access-content h2 {
-
     font-size: 38px;
-
   }
 
   .code-box {
-
     width: 200px;
-
   }
 
+
+  /* INTRO */
+
+  .hero-number {
+    padding:
+      8px
+      12px
+      15px;
+  }
+
+  .hero-number span {
+    font-size: 135px;
+
+    letter-spacing: -5px;
+  }
+
+  .names {
+    font-size: 11px;
+
+    letter-spacing: 5px;
+  }
+
+  .intro-message {
+    font-size: 10px;
+  }
+
+  .intro-decor {
+    width: 320px;
+    height: 285px;
+  }
+
+  .orbit {
+    width: 300px;
+    height: 105px;
+  }
+
+  .orbit-two {
+    width: 265px;
+    height: 88px;
+  }
+
+  .light-beam {
+    width: 55vw;
+
+    filter: blur(15px);
+
+    opacity: 0.45;
+  }
+
+  .disco-ball-large {
+    width: 95px;
+    height: 95px;
+
+    left: -25px;
+    top: 6%;
+  }
+
+  .disco-ball-medium {
+    width: 70px;
+    height: 70px;
+
+    right: -12px;
+    top: 10%;
+  }
+
+  .disco-ball-small {
+    width: 48px;
+    height: 48px;
+
+    right: 10%;
+    top: 32%;
+  }
+
+  .disco-string {
+    height: 65px;
+  }
+
+
+  /* INVITO */
+
+  .invitation {
+    padding-top: 8vh;
+  }
+
+  .invitation h2,
+  .details-screen h2,
+  .dresscode h2,
+  .rsvp h2 {
+    font-size: 50px;
+  }
+
+  .invitation .age {
+    font-size: 95px;
+
+    margin-top: 18px;
+    margin-bottom: 12px;
+  }
+
+  .invitation .message {
+    margin-top: 12px;
+    margin-bottom: 20px;
+  }
+
+
+  /* DETTAGLI */
+
+  .date-day {
+    font-size: 76px;
+  }
+
+  .date-month {
+    font-size: 10px;
+
+    letter-spacing: 6px;
+  }
+
+  .date-line {
+    width: 150px;
+
+    margin: 14px 0;
+  }
+
+  .event-time {
+    gap: 17px;
+  }
+
+  .event-time strong {
+    font-size: 22px;
+  }
+
+  .countdown-container {
+    width: 310px;
+  }
+
+  .countdown-item {
+    min-width: 40px;
+  }
+
+  .countdown-item strong {
+    font-size: 22px;
+  }
+
+
+  /* DRESS CODE */
+
+  .dress-symbol {
+    width: 95px;
+    height: 95px;
+  }
+
+
+  /* RSVP */
+
+  .rsvp-response h3 {
+    font-size: 25px;
+  }
+
+  .final-signature {
+    margin-top: 25px;
+  }
+
+
+  /* SFONDO */
+
+  .background-lights::after {
+    font-size: 12px;
+
+    letter-spacing: 20px;
+  }
 }
